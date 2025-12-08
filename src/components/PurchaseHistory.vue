@@ -29,7 +29,7 @@ const historyRef = toRef(props, 'history')
 <style scoped>
 .history-window { margin: 16px 0; padding: 12px; border: 1px solid #ccc; border-radius: 6px; }
 h3 { margin-top: 0; }
-.empty { color: #999; font-size: 0.9rem; }
+.empty { color: #e61010; font-size: 0.9rem; }
 
 .history-list { display: flex; flex-direction: column; gap: 8px; }
 .history-item {

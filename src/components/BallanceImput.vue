@@ -14,7 +14,7 @@ const input = computed({
 })
 
 function save() {
-  if(input.value >= 0) {
+  if(input.value > 0) {
     localStorage.setItem('savedTextarea', input.value)
     emit('save', { value: input.value, placeholder: props.placeholder })    
   } else {

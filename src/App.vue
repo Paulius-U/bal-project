@@ -34,28 +34,27 @@ function handleSave(payload) {
 </script>
 
 <template>
-  <div>
-    <BallanceWindow :balance="balance"/>
-    </br>
-    <BallanceImput v-model="text1" :placeholder="placeholder1" @save="handleSave"/>
-    </br>
-    <BallanceImput v-model="text2" :placeholder="placeholder2" @save="handleSave"/>
-    </br>
-    <PurchaseHistory :history="history"/>
-  </div>
+  <body class="baground">
+    <div>
+      <BallanceWindow :balance="balance"/>
+      </br>
+      <BallanceImput v-model="text1" :placeholder="placeholder1" @save="handleSave"/>
+      </br>
+      <BallanceImput v-model="text2" :placeholder="placeholder2" @save="handleSave"/>
+      </br>
+      <PurchaseHistory class="history-window" :history="history"/>
+    </div>
+  </body>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+  .baground {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: rgb(146, 66, 212);
+  }  
+  .history-window {
+    background-color: rgb(81, 196, 224);
+  }
 </style>
