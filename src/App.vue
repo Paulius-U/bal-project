@@ -3,28 +3,16 @@ import { ref, computed  } from 'vue'
 import BalanceWindow from './components/BalanceWindow.vue'
 import BalanceInput from './components/BalanceInput.vue'
 import PurchaseHistory from './components/PurchaseHistory.vue'
+import { useTransactions } from './composable/useTransactions.js'
 
 const incomeAmount = ref(0)
 const expenseAmount = ref(0)
 
-const history = ref([])
-
-const balance = computed(() => {
-  return history.value.reduce((total, item) => {
-    return item.type === 'income'
-      ? total + item.value
-      : total - item.value
-  }, 0)
-})
+const { history, balance, addTransaction } = useTransactions()
 
 function handleSave({ amount, type }) {
-  history.value.push({
-    value: amount,
-    type: type,
-    timestamp: new Date().toLocaleString()
-  })
+  addTransaction({ amount, type })
 
-  
   if (type === 'income') incomeAmount.value = 0
   if (type === 'expense') expenseAmount.value = 0
 }
