@@ -2,6 +2,11 @@ import { ref, computed } from 'vue'
 
 export function useTransactions() {
   const history = ref([])
+  const savedHistory = localStorage.getItem('transactionHistory')
+  
+  if (savedHistory) {
+    history.value = JSON.parse(savedHistory)
+  }
 
   const balance = computed(() =>
     history.value.reduce((total, item) =>
@@ -17,6 +22,7 @@ export function useTransactions() {
     type: type,
     timestamp: new Date().toLocaleString()
     })
+    localStorage.setItem('transactionHistory', JSON.stringify(history.value))
   }
 
   return {
