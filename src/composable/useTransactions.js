@@ -18,16 +18,22 @@ export function useTransactions() {
 
   function addTransaction({ amount, type }) {
     history.value.push({
-    value: amount,
-    type: type,
-    timestamp: new Date().toLocaleString()
+      value: amount,
+      type: type,
+      timestamp: new Date().toISOString()
     })
+    localStorage.setItem('transactionHistory', JSON.stringify(history.value))
+  }
+
+  function deleteTransaction(index) {
+    history.value.splice(index, 1)
     localStorage.setItem('transactionHistory', JSON.stringify(history.value))
   }
 
   return {
     history,
     balance,
-    addTransaction
+    addTransaction,
+    deleteTransaction
   }
 }

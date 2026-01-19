@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed  } from 'vue'
+import { ref } from 'vue'
 import BalanceWindow from './components/BalanceWindow.vue'
 import BalanceInput from './components/BalanceInput.vue'
 import PurchaseHistory from './components/PurchaseHistory.vue'
@@ -8,7 +8,7 @@ import { useTransactions } from './composable/useTransactions.js'
 const incomeAmount = ref(0)
 const expenseAmount = ref(0)
 
-const { history, balance, addTransaction } = useTransactions()
+const { history, balance, addTransaction, deleteTransaction } = useTransactions()
 
 function handleSave({ amount, type }) {
   addTransaction({ amount, type })
@@ -38,6 +38,7 @@ function handleSave({ amount, type }) {
     <PurchaseHistory 
       class="history-window" 
       :history="history"
+      @delete="deleteTransaction"
     />
   </div>
 </template>

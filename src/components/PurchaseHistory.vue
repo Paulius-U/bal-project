@@ -5,6 +5,8 @@ const props = defineProps({
   history: { type: Array, default: () => [] }
 })
 
+const emit = defineEmits(['delete'])
+
 const historyRef = toRef(props, 'history')
 </script>
 
@@ -20,7 +22,8 @@ const historyRef = toRef(props, 'history')
       <div v-for="(item, index) in historyRef" :key="index" class="history-item">
         <span class="type" :class="item.type.toLowerCase()">{{ item.type }}</span>
         <span class="value">{{ item.value.toFixed(2) }} €</span>
-        <span class="time">{{ item.timestamp }}</span>
+        <span class="time">{{ new Date(item.timestamp).toLocaleString() }}</span>
+        <button @click="emit('delete', index)" class="delete-btn">Delete</button>
       </div>
     </div>
   </section>
@@ -61,4 +64,14 @@ h3 { margin-top: 0; }
 
 .value { font-weight: 600; flex: 1; }
 .time { color: #666; font-size: 0.8rem; }
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.delete-btn:hover { background: #c82333; }
 </style>
