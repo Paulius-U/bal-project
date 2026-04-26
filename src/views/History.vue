@@ -1,16 +1,16 @@
 <script setup>
 import PurchaseHistory from '../components/PurchaseHistory.vue'
-import { useTransactions } from '../composable/useTransactions.js'
+import { useTransactionsStore } from '../stores/transactions.js'
 
-const { history, deleteTransaction } = useTransactions()
+const transactionsStore = useTransactionsStore()
 </script>
 
 <template>
   <div class="background">
     <PurchaseHistory 
       class="history-window" 
-      :history="history"
-      @delete="deleteTransaction"
+      :history="transactionsStore.history"
+      @delete="transactionsStore.deleteTransaction"
     />
     <router-link to="/">Back to Balance Page</router-link>
   </div>

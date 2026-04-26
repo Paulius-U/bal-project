@@ -2,25 +2,24 @@
 import { ref } from 'vue'
 import BalanceWindow from '../components/BalanceWindow.vue'
 import BalanceInput from '../components/BalanceInput.vue'
-import { useTransactions } from '../composable/useTransactions.js'
+import { useTransactionsStore } from '../stores/transactions.js'
 
 const incomeAmount = ref(0)
 const expenseAmount = ref(0)
 
-const { balance, addTransaction } = useTransactions()
+const transactionsStore = useTransactionsStore()
 
 function handleSave({ amount, type }) {
-  addTransaction({ amount, type })
+  transactionsStore.addTransaction({ amount, type })
 
   if (type === 'income') incomeAmount.value = 0
   if (type === 'expense') expenseAmount.value = 0
 }
-
 </script>
 
 <template>
   <div class="background">
-    <BalanceWindow :balance="balance"/>
+    <BalanceWindow :balance="transactionsStore.balance"/>
     </br>
     <BalanceInput 
       v-model="incomeAmount"
